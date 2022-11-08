@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient {
+object ApiClient {
     private val okHttpClientBuilder = OkHttpClient().newBuilder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
@@ -35,14 +35,8 @@ class ApiClient {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    var recruit = Retrofit.Builder()
-        .baseUrl(Constants.endpoint_recruit)
-        .client(okHttpClientBuilder)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
-
-    var cell = Retrofit.Builder()
-        .baseUrl(Constants.endpoint_cell)
+    var client = Retrofit.Builder()
+        .baseUrl(Constants.endpoint)
         .client(okHttpClientBuilder)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
