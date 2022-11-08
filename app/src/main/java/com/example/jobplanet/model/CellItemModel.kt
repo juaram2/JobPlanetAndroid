@@ -4,33 +4,38 @@ import com.example.jobplanet.enum.CellType
 import com.squareup.moshi.Json
 import java.time.LocalDateTime
 
+data class CellItemsModel (
+    @Json(name = "cell_items")
+    val cellItems: List<CellItemModel>? = null,
+)
+
 data class CellItemModel (
     @Json(name = "cell_type")
-    val cellType: CellType?,
+    val cellType: CellType? = null,
     @Json(name = "count")
-    val count: Int?,
+    val count: Int? = null,
     @Json(name = "section_title")
-    val sectionTitle: String?,
+    val sectionTitle: String? = null,
     @Json(name = "recommend_recruit")
-    val recommendRecruit: List<RecruitItemModel>?,
+    val recommendRecruit: List<RecruitItemModel>? = null,
     @Json(name = "logo_path")
-    val logoPath: String?,
+    val logoPath: String? = null,
     @Json(name = "name")
-    val name: String?,
+    val name: String? = null,
     @Json(name = "industry_name")
-    val industryName: String?,
+    val industryName: String? = null,
     @Json(name = "rate_total_avg")
-    val rateTotalAvg: Double?,
+    val rateTotalAvg: Double? = null,
     @Json(name = "review_summary")
-    val reviewSummary: String?,
+    val reviewSummary: String? = null,
     @Json(name = "cons")
-    val cons: String?,
+    val cons: String? = null,
     @Json(name = "pros")
-    val pros: String?,
+    val pros: String? = null,
     @Json(name = "interview_question")
-    val interviewQuestion: String?,
+    val interviewQuestion: String? = null,
     @Json(name = "salary_avg")
-    val salaryAvg: Int?,
+    val salaryAvg: Int? = null,
     @Json(name = "update_date")
-    val updateDate: LocalDateTime?,
+    val updateDate: LocalDateTime? = null
 )

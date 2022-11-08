@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jobplanet.model.CellItemModel
-import com.example.jobplanet.model.RecruitItemModel
+import com.example.jobplanet.model.CellItemsModel
+import com.example.jobplanet.model.RecruitItemsModel
 import com.example.jobplanet.service.ApiClient
 import com.example.jobplanet.service.JobPlanetApi
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +18,13 @@ class JobPlanetVM: ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    private val _recruits = MutableLiveData<List<RecruitItemModel>>()
-    val recruits: LiveData<List<RecruitItemModel>> = _recruits
+    private val _recruits = MutableLiveData<RecruitItemsModel>()
+    val recruits: LiveData<RecruitItemsModel> = _recruits
 
-    private val _cells = MutableLiveData<List<CellItemModel>>()
-    val cells: LiveData<List<CellItemModel>> = _cells
+    private val _cells = MutableLiveData<CellItemsModel>()
+    val cells: LiveData<CellItemsModel> = _cells
 
-    fun getRecruits() {
+    fun getRecruitItems() {
         _loading.value = true
         viewModelScope.launch(Dispatchers.Main) {
             val response = api.getRecruitItems()
@@ -32,6 +32,7 @@ class JobPlanetVM: ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _recruits.postValue(it)
+                        Log.d("debug", "getRecruits ${it.recruitItems}")
                     }
                 } else {
                     Log.d("debug", "getRecruits failed.")
@@ -44,7 +45,7 @@ class JobPlanetVM: ViewModel() {
         }
     }
 
-    fun getCells() {
+    fun getCellItems() {
         _loading.value = true
         viewModelScope.launch(Dispatchers.Main) {
             val response = api.getCellItems()
@@ -52,6 +53,7 @@ class JobPlanetVM: ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _cells.postValue(it)
+                        Log.d("debug", "getRecruits ${it.cellItems}")
                     }
                 } else {
                     Log.d("debug", "getRecruits failed.")
