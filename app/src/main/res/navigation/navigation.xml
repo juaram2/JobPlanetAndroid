@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation">
+
+    <fragment
+        android:id="@+id/searchTabFragment"
+        android:name="com.example.jobplanet.ui.fragment.SearchTabFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search_tab">
+        <action
+            android:id="@+id/action_to_recruitFragment"
+            app:destination="@id/recruitFragment" />
+        <action
+            android:id="@+id/action_to_cellFragment"
+            app:destination="@id/cellFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recruitFragment"
+        android:name=""
+        android:label="Recruit"
+        tools:layout="">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action android:id="@+id/action_recruitFragment_self"
+            app:destination="@id/recruitFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cellFragment"
+        android:name=""
+        android:label="Cell"
+        tools:layout="">
+    </fragment>
+</navigation>

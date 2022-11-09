@@ -1,3 +1,5 @@
 <resources>
-  <string name="app_name">JobPlanet</string>
+    <string name="app_name">JobPlanet</string>
+    <string name="tab_recruit">채용</string>
+    <string name="tab_cell">기업</string>
 </resources>
