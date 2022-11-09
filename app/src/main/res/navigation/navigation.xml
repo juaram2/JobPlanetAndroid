@@ -2,37 +2,38 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation">
+    android:id="@+id/navigation"
+    app:startDestination="@id/searchTabFragment">
 
     <fragment
         android:id="@+id/searchTabFragment"
         android:name="com.example.jobplanet.ui.fragment.SearchTabFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search_tab">
-        <action
-            android:id="@+id/action_to_recruitFragment"
-            app:destination="@id/recruitFragment" />
-        <action
-            android:id="@+id/action_to_cellFragment"
-            app:destination="@id/cellFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_to_recruitFragment"-->
+<!--            app:destination="@id/recruitFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_to_cellFragment"-->
+<!--            app:destination="@id/cellFragment" />-->
     </fragment>
 
     <fragment
         android:id="@+id/recruitFragment"
-        android:name=""
+        android:name="com.example.jobplanet.ui.fragment.RecruitFragment"
         android:label="Recruit"
-        tools:layout="">
-        <argument
-            android:name="id"
-            app:argType="integer" />
-        <action android:id="@+id/action_recruitFragment_self"
-            app:destination="@id/recruitFragment" />
+        tools:layout="@layout/fragment_recruit">
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            app:argType="integer" />-->
+<!--        <action android:id="@+id/action_recruitFragment_self"-->
+<!--            app:destination="@id/recruitFragment" />-->
     </fragment>
 
     <fragment
         android:id="@+id/cellFragment"
-        android:name=""
+        android:name="com.example.jobplanet.ui.fragment.CellFragment"
         android:label="Cell"
-        tools:layout="">
+        tools:layout="@layout/fragment_cell">
     </fragment>
 </navigation>

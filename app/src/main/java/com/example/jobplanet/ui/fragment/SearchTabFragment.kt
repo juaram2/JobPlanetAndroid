@@ -1,10 +1,11 @@
 package com.example.jobplanet.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.jobplanet.R
 import com.example.jobplanet.adapter.SearchTabPagerAdapter
@@ -23,13 +24,35 @@ class SearchTabFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        viewModel.getRecruitItems()
+        viewModel.getCellItems()
+
+        // Search View
+        val searchTerm = binding.searchTerm.query
+        binding.searchTerm.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.onQueryTextSubmit(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    viewModel.onQueryTextChange(it)
+                }
+                return false
+            }
+        })
+
+        // Tab Layout
         activity?.let { activity ->
             binding.tabLayout.let { tab ->
                 tab.tabMode = TabLayout.MODE_FIXED
                 tab.tabGravity = TabLayout.GRAVITY_FILL
 
                 binding.viewPager.let { pager ->
-                    pager.adapter = SearchTabPagerAdapter(activity)
+                    pager.adapter = SearchTabPagerAdapter(activity, searchTerm)
                     pager.isUserInputEnabled = false
 
                     TabLayoutMediator(tab, pager) { tab, position ->

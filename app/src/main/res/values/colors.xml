@@ -6,6 +6,7 @@
   <color name="gray_200">#E5E6E9</color>
   <color name="gray_500">#686A6D</color>
   <color name="gray_700">#323438</color>
-  <color name="black">#FF000000</color>
-  <color name="white">#FFFFFFFF</color>
+  <color name="black">#F000</color>
+  <color name="white">#FFFF</color>
+  <color name="transparent">#0000</color>
 </resources>

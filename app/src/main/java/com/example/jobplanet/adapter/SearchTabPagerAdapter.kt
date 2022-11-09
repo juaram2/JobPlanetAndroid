@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.jobplanet.ui.fragment.CellFragment
 import com.example.jobplanet.ui.fragment.RecruitFragment
 
-class SearchTabPagerAdapter(activity: FragmentActivity, private val searchTerm: String?): FragmentStateAdapter(activity) {
+class SearchTabPagerAdapter(activity: FragmentActivity, private val searchTerm: CharSequence?): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
         return 2
     }

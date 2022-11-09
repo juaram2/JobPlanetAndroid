@@ -10,12 +10,12 @@ import com.example.jobplanet.R
 private const val SEARCH_TERM = "search_term"
 
 class RecruitFragment : Fragment() {
-    private var searchTerm: String? = null
+    private var searchTerm: CharSequence? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            searchTerm = it.getString(SEARCH_TERM)
+            searchTerm = it.getCharSequence(SEARCH_TERM)
         }
     }
 
@@ -36,10 +36,10 @@ class RecruitFragment : Fragment() {
          * @return A new instance of fragment RecruitFragment.
          */
         @JvmStatic
-        fun newInstance(searchTerm: String?) =
+        fun newInstance(searchTerm: CharSequence?) =
             RecruitFragment().apply {
                 arguments = Bundle().apply {
-                    putString(SEARCH_TERM, searchTerm)
+                    putCharSequence(SEARCH_TERM, searchTerm)
                 }
             }
     }

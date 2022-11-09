@@ -10,13 +10,10 @@ import com.example.jobplanet.viewmodel.JobPlanetVM
 class MainActivity : BaseActivity() {
     private val viewModel by viewModels<JobPlanetVM>()
 
-    private var navController: NavController? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        navController = findNavController(R.id.nav_host_fragment)
+        loadingProgress = findViewById(R.id.loading_view)
 
         // Loading View
         viewModel.loading.observe(this) {
