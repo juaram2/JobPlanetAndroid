@@ -1,16 +1,23 @@
 package com.example.jobplanet.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.jobplanet.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.jobplanet.adapter.CellListAdapter
+import com.example.jobplanet.adapter.CellListAdapterListener
+import com.example.jobplanet.databinding.FragmentCellBinding
+import com.example.jobplanet.viewmodel.JobPlanetVM
 
 private const val SEARCH_TERM = "search_term"
 
 class CellFragment : Fragment() {
     private var searchTerm: CharSequence? = null
+    private lateinit var viewModel : JobPlanetVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +30,44 @@ class CellFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cell, container, false)
+        val binding = FragmentCellBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[JobPlanetVM::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.getCellItems()
+
+        val navController = this.findNavController()
+
+        val adapterListener = CellListAdapterListener(click = {
+//            navController.navigate()
+        })
+        val adapter = CellListAdapter(adapterListener)
+
+        viewModel.cells.observe(viewLifecycleOwner) { data ->
+            adapter.setData(data)
+            adapter.notifyDataSetChanged()
+            data?.let {
+                viewModel.noData(data.isEmpty())
+            }
+        }
+
+        val layoutManager = GridLayoutManager(
+            activity, 2, GridLayoutManager.VERTICAL, false
+        )
+
+        binding.recyclerViewRecruit.apply {
+            setHasFixedSize(true)
+            setLayoutManager(layoutManager)
+            setAdapter(adapter)
+        }
+
+        with(binding.recyclerViewRecruit) {
+            clipToPadding = false
+            clipChildren = false
+        }
+
+        return binding.root
     }
 
     companion object {

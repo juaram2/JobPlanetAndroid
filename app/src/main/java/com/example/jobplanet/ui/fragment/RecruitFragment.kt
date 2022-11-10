@@ -46,7 +46,6 @@ class RecruitFragment : Fragment() {
         val adapter = RecruitListAdapter(adapterListener)
 
         viewModel.recruits.observe(viewLifecycleOwner) { data ->
-            Log.d("debug","!!!!!!!!!!!!")
             adapter.setData(data)
             adapter.notifyDataSetChanged()
             data?.let {

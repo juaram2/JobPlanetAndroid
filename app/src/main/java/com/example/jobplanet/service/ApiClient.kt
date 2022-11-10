@@ -3,7 +3,7 @@ package com.example.jobplanet.service
 import android.util.Log
 import com.example.jobplanet.BuildConfig
 import com.example.jobplanet.utils.Constants
-import com.example.jobplanet.utils.OffsetDateTimeAdapter
+import com.example.jobplanet.adapter.OffsetDateTimeAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

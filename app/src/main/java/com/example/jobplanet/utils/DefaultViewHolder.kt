@@ -1,4 +1,4 @@
-package com.example.jobplanet.adapter
+package com.example.jobplanet.utils
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

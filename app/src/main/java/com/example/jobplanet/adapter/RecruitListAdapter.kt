@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jobplanet.R
 import com.example.jobplanet.model.RecruitItemModel
-
+import com.example.jobplanet.utils.DefaultViewHolder
 
 class RecruitListAdapter(private val listener: RecruitListAdapterListener) : RecyclerView.Adapter<DefaultViewHolder>() {
     private var data: List<RecruitItemModel>? = null

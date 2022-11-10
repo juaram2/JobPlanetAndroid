@@ -80,6 +80,4 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Company Name"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
