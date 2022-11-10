@@ -22,11 +22,18 @@ class JobPlanetVM: ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    private val _recruits = MutableLiveData<List<RecruitItemModel>?>()
-    val recruits: LiveData<List<RecruitItemModel>?> = _recruits
+    private val _noData = MutableLiveData(false)
+    val noData: LiveData<Boolean> = _noData
 
-    private val _cells = MutableLiveData<List<CellItemModel>?>()
-    val cells: LiveData<List<CellItemModel>?> = _cells
+    private val _recruits = MutableLiveData<List<RecruitItemModel>>()
+    val recruits: LiveData<List<RecruitItemModel>> = _recruits
+
+    private val _cells = MutableLiveData<List<CellItemModel>>()
+    val cells: LiveData<List<CellItemModel>> = _cells
+
+    fun noData(isEmpty: Boolean) {
+        _noData.postValue(isEmpty)
+    }
 
     fun onQueryTextSubmit(searchTerm: String?) {
         searchTerm?.let { searchTerm ->

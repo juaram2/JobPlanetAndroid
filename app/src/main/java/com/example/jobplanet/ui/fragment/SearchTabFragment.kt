@@ -24,12 +24,12 @@ class SearchTabFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModel.getRecruitItems()
         viewModel.getCellItems()
 
         // Search View
-        val searchTerm = binding.searchTerm.query
-        binding.searchTerm.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchTerm = binding.searchView.query
+        binding.searchView.clearFocus()
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     viewModel.onQueryTextSubmit(it)

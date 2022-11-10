@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.WindowManager.LayoutParams" />
         <variable name="viewModel" type="com.example.jobplanet.viewmodel.JobPlanetVM" />
     </data>
 
@@ -37,6 +36,7 @@
                 android:id="@+id/search_view"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
+                android:focusedByDefault="false"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:touchscreenBlocksFocus="true"
