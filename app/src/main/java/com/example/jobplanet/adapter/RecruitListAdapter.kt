@@ -9,6 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.jobplanet.R
 import com.example.jobplanet.model.RecruitItemModel
 import com.example.jobplanet.utils.DefaultViewHolder
+import com.example.jobplanet.utils.Utils
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class RecruitListAdapter(private val listener: RecruitListAdapterListener) : RecyclerView.Adapter<DefaultViewHolder>() {
     private var data: List<RecruitItemModel>? = null
@@ -30,19 +33,65 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
         val title = view.findViewById<TextView>(R.id.title)
         val companyRating = view.findViewById<TextView>(R.id.company_rating)
         val companyName = view.findViewById<TextView>(R.id.company_name)
+        val appealGroup = view.findViewById<ChipGroup>(R.id.appeal_group)
+        val reward = view.findViewById<TextView>(R.id.reward)
 
-        if (item != null) {
-            if (item.imageUrl != null) {
+        item?.let {
+            /**
+             * Thumbnail
+             */
+            if (!item.imageUrl.isNullOrEmpty()) {
                 Glide.with(view).load(item.imageUrl).centerCrop().into(thumbnail)
             }
+
+            /**
+             * Title
+             */
             title.text = item.title ?: ""
 
+            /**
+             * Company
+             */
             if (item.company != null) {
                 val highestRating = item.company.ratings?.maxOf { it.rating!! }
                 companyRating.text = highestRating.toString()
                 companyName.text = item.company.name ?: ""
             }
 
+            /**
+             * Appeal
+             */
+            if (!item.appeal.isNullOrEmpty()) {
+                val chipGroupInflater = LayoutInflater.from(appealGroup.context)
+
+                // Convert String to List<String>
+                val appeals: List<String> = item.appeal.split(",")
+                val children = appeals.map {
+                    val chip = chipGroupInflater.inflate(R.layout.item_appeal, appealGroup, false) as Chip
+                    chip.text = it.trim()
+                    chip
+                }
+
+                appealGroup.removeAllViews()
+
+                for(chip: Chip in children) {
+                    appealGroup.addView(chip)
+                }
+            }
+
+            /**
+             * Reward
+             */
+            if (item.reward != null && item.reward != 0) {
+                val formattedReward = Utils.formattingDecimal(item.reward)
+                reward.text = "보상금: " + formattedReward + "원"
+            } else {
+                reward.text = ""
+            }
+
+            /**
+             * Navigation
+             */
             view.setOnClickListener {
                 item.let {
                     listener.onClick(item)

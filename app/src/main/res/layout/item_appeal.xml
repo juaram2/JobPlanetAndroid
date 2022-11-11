@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appeal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="10sp"
+    android:maxLines="1"
+    android:ellipsize="end"
+    app:chipStrokeWidth="1dp"
+    app:chipStrokeColor="@color/gray_200"
+    app:chipBackgroundColor="@color/transparent"
+    app:chipCornerRadius="4dp"
+    tools:text="Appeal"
+    tools:ignore="SmallSp" />

@@ -8,6 +8,10 @@ buildscript {
         version_retrofit = "2.9.0"
         version_moshi = "1.13.0"
     }
+
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
+    }
 }
 
 plugins {

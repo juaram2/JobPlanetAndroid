@@ -36,12 +36,13 @@ class RecruitFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.getRecruitItems()
+        viewModel.getRecruitItems(searchTerm.toString())
 
         val navController = this.findNavController()
 
         val adapterListener = RecruitListAdapterListener(click = {
-//            navController.navigate()
+            RecruitDetailFragment.newInstance(it.id)
+            navController.navigate(SearchTabFragmentDirections.actionToRecruitDetailFragment(it.id))
         })
         val adapter = RecruitListAdapter(adapterListener)
 

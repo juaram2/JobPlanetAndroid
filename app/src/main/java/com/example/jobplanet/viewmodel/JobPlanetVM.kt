@@ -1,5 +1,6 @@
 package com.example.jobplanet.viewmodel
 
+import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -14,16 +15,10 @@ import com.example.jobplanet.service.JobPlanetApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class JobPlanetVM: ViewModel() {
+class JobPlanetVM(application: Application): BaseVM(application) {
     private val api = ApiClient.client.create(JobPlanetApi::class.java)
 
     private val handler = Handler(Looper.getMainLooper())
-
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
-    private val _noData = MutableLiveData(false)
-    val noData: LiveData<Boolean> = _noData
 
     private val _recruits = MutableLiveData<List<RecruitItemModel>>()
     val recruits: LiveData<List<RecruitItemModel>> = _recruits
@@ -35,11 +30,9 @@ class JobPlanetVM: ViewModel() {
         _noData.postValue(isEmpty)
     }
 
-    fun onQueryTextSubmit(searchTerm: String?) {
-        searchTerm?.let { searchTerm ->
-            getRecruitItems(searchTerm)
-            getCellItems(searchTerm)
-        }
+    fun onQueryTextSubmit(searchTerm: String) {
+        getRecruitItems(searchTerm)
+        getCellItems(searchTerm)
     }
 
     fun onQueryTextChange(searchTerm: String) {
@@ -60,22 +53,21 @@ class JobPlanetVM: ViewModel() {
             try {
                 if (response.isSuccessful) {
                     response.body()?.let { data ->
-                        searchTerm?.let { term ->
+                        if (!searchTerm.isNullOrBlank()) {
                             val filteredData = data.recruitItems?.filter {
-                                term.contains(it.title ?: "")
+                                it.title?.contains(searchTerm) == true
                             }
                             _recruits.postValue(filteredData)
-                        } ?: run {
+                        } else {
                             _recruits.postValue(data.recruitItems)
                         }
-                        Log.d("debug", "getRecruits ${data.recruitItems}")
+                        Log.d("debug", "getRecruitItems count ${data.recruitItems?.size}")
+                        Log.d("debug", "getRecruitItems ${data.recruitItems}")
                     }
-                } else {
-                    Log.d("debug", "getRecruits failed.")
                 }
                 _loading.value = false
             } catch (e: Exception) {
-                Log.e("error", "Error! ${e.localizedMessage}")
+                e.localizedMessage
                 _loading.value = false
             }
         }
@@ -88,22 +80,21 @@ class JobPlanetVM: ViewModel() {
             try {
                 if (response.isSuccessful) {
                     response.body()?.let { data ->
-                        searchTerm?.let { term ->
+                        if (!searchTerm.isNullOrBlank()) {
                             val filteredData = data.cellItems?.filter {
-                                term.contains(it.name ?: "")
+                                it.name?.contains(searchTerm) == true
                             }
                             _cells.postValue(filteredData)
-                        } ?: run {
+                        } else {
                             _cells.postValue(data.cellItems)
                         }
-                        Log.d("debug", "getRecruits ${data.cellItems}")
+                        Log.d("debug", "getCellItems count ${data.cellItems?.size}")
+                        Log.d("debug", "getCellItems ${data.cellItems}")
                     }
-                } else {
-                    Log.d("debug", "getRecruits failed.")
                 }
                 _loading.value = false
             } catch (e: Exception) {
-                Log.e("error", "Error! ${e.localizedMessage}")
+                e.localizedMessage
                 _loading.value = false
             }
         }
