@@ -44,14 +44,4 @@ class RecruitDetailFragment : Fragment() {
 
         return binding.root
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(id: Int) =
-            RecruitDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ID, id)
-                }
-            }
-    }
 }

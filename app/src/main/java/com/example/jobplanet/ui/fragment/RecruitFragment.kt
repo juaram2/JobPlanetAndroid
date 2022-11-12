@@ -41,7 +41,6 @@ class RecruitFragment : Fragment() {
         val navController = this.findNavController()
 
         val adapterListener = RecruitListAdapterListener(click = {
-            RecruitDetailFragment.newInstance(it.id)
             navController.navigate(SearchTabFragmentDirections.actionToRecruitDetailFragment(it.id))
         })
         val adapter = RecruitListAdapter(adapterListener)
