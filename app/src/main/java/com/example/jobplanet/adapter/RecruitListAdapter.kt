@@ -41,7 +41,11 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
              * Thumbnail
              */
             if (!item.imageUrl.isNullOrEmpty()) {
-                Glide.with(view).load(item.imageUrl).centerCrop().into(thumbnail)
+                Glide.with(view)
+                    .load(item.imageUrl)
+                    .error(R.drawable.placeholder)
+                    .centerCrop()
+                    .into(thumbnail)
             }
 
             /**

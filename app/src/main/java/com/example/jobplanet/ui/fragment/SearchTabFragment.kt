@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.jobplanet.R
 import com.example.jobplanet.adapter.SearchTabPagerAdapter
 import com.example.jobplanet.databinding.FragmentSearchTabBinding
-import com.example.jobplanet.viewmodel.JobPlanetVM
+import com.example.jobplanet.viewmodel.RecruitVM
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -23,7 +23,7 @@ class SearchTabFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSearchTabBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(this)[JobPlanetVM::class.java]
+        val viewModel = ViewModelProvider(this)[RecruitVM::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

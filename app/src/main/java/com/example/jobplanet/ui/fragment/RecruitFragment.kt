@@ -1,7 +1,6 @@
 package com.example.jobplanet.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.jobplanet.adapter.RecruitListAdapter
 import com.example.jobplanet.adapter.RecruitListAdapterListener
 import com.example.jobplanet.databinding.FragmentRecruitBinding
-import com.example.jobplanet.viewmodel.JobPlanetVM
+import com.example.jobplanet.viewmodel.RecruitVM
 
 private const val SEARCH_TERM = "search_term"
 
 class RecruitFragment : Fragment() {
     private var searchTerm: CharSequence? = null
-    private lateinit var viewModel : JobPlanetVM
+    private lateinit var viewModel : RecruitVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +31,7 @@ class RecruitFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentRecruitBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[JobPlanetVM::class.java]
+        viewModel = ViewModelProvider(this)[RecruitVM::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

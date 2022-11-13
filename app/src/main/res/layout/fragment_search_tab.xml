@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.example.jobplanet.viewmodel.JobPlanetVM" />
+        <variable name="viewModel" type="com.example.jobplanet.viewmodel.RecruitVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

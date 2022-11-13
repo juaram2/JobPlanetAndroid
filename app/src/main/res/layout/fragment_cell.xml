@@ -4,17 +4,18 @@
         <import type="android.view.View" />
         <variable
           name="viewModel"
-          type="com.example.jobplanet.viewmodel.JobPlanetVM" />
+          type="com.example.jobplanet.viewmodel.CellVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingVertical="20dp"
         tools:context=".ui.fragment.CellFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_recruit"
+            android:id="@+id/recycler_view_cell"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

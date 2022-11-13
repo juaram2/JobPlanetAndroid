@@ -4,7 +4,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.example.jobplanet.viewmodel.JobPlanetVM" />
+            type="com.example.jobplanet.viewmodel.RecruitVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
