@@ -7,59 +7,145 @@
             type="com.example.jobplanet.viewmodel.RecruitDetailVM" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recruit_detail"
-        tools:context=".ui.fragment.RecruitDetailFragment">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-        <TextView
-            android:id="@+id/title"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="18dp"
-            android:text="@{viewModel.recruit.title}"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/gray_700"
-            tools:text="Title"
-            app:layout_constraintTop_toBottomOf="@id/thumbnail"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/company_logo" />
+            android:id="@+id/recruit_detail"
+            tools:context=".ui.fragment.RecruitDetailFragment">
 
-        <ImageView
-            android:id="@+id/company_logo"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/company_name" />
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:text="@{viewModel.recruit.title}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray_700"
+                tools:text="Title"
+                app:layout_constraintTop_toBottomOf="@id/thumbnail"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/logo" />
 
-        <TextView
-            android:id="@+id/company_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@{viewModel.recruit.company.name}"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/gray_700"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintTop_toTopOf="@id/company_logo"
-            app:layout_constraintLeft_toRightOf="@id/company_logo"
-            app:layout_constraintRight_toRightOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="12dp"
+                android:clipToOutline="true"
+                android:background="@drawable/bg_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintLeft_toLeftOf="@id/title"
+                app:layout_constraintRight_toLeftOf="@id/name"
+                tools:src="@color/gray_200"
+                tools:targetApi="s" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.recruit.company.name}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintTop_toTopOf="@id/logo"
+                app:layout_constraintLeft_toRightOf="@id/logo"
+                app:layout_constraintRight_toRightOf="@id/title"
+                app:layout_constraintBottom_toTopOf="@id/rate_avg"
+                tools:text="Company Name"
+                />
+            <ImageView
+                android:id="@+id/icon_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/icon_star"
+                android:contentDescription="@string/description_star"
+                app:layout_constraintTop_toTopOf="@id/rate_avg"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintLeft_toLeftOf="@id/name"
+                app:layout_constraintLeft_toRightOf="@id/logo"
+                app:layout_constraintRight_toLeftOf="@id/rate_avg"
+                app:layout_constraintBottom_toBottomOf="@id/rate_avg"
+                />
+            <TextView
+                android:id="@+id/rate_avg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintLeft_toRightOf="@id/icon_star"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/logo"
+                tools:text="4.1"
+                />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/appeal_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintTop_toBottomOf="@id/logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/divider"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="24dp"
+                android:background="@color/gray_200"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appeal_group"
+                app:layout_constraintBottom_toTopOf="@id/rating_title"
+                />
+
+            <TextView
+                android:id="@+id/rating_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/description_star"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray_700"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+            <LinearLayout
+                android:id="@+id/layout_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/rating_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

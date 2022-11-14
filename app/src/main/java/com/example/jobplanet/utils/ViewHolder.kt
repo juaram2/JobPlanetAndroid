@@ -6,5 +6,3 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 open class DefaultViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-open class ParentViewHolder(viewGroup: ViewGroup) : RecyclerView.ViewHolder(viewGroup.rootView)

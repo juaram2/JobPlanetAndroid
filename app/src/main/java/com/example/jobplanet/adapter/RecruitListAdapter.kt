@@ -57,8 +57,8 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
              * Company
              */
             if (item.company != null) {
-                val highestRating = item.company.ratings?.maxOf { it.rating!! }
-                companyRating.text = highestRating.toString()
+                val highestRating = Utils.highestNumber(item.company.ratings)
+                companyRating.text = highestRating
                 companyName.text = item.company.name ?: ""
             }
 
@@ -69,7 +69,7 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
                 val chipGroupInflater = LayoutInflater.from(appealGroup.context)
 
                 // Convert String to List<String>
-                val appeals: List<String> = item.appeal.split(",")
+                val appeals = Utils.stringToList(item.appeal)
                 val children = appeals.map {
                     val chip = chipGroupInflater.inflate(R.layout.item_chip_appeal, appealGroup, false) as Chip
                     chip.text = it.trim()

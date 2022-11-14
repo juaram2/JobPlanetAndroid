@@ -1,9 +1,10 @@
 package com.example.jobplanet.utils
 
-import android.view.LayoutInflater
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.jobplanet.R
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
+import com.example.jobplanet.model.RatingModel
 import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -22,24 +23,22 @@ class Utils {
             return dateFormat.format(date)
         }
 
-        fun splitStringToArray(item: String, itemGroup: ChipGroup) {
-            if (item.isNotEmpty()) {
-                val chipGroupInflater = LayoutInflater.from(itemGroup.context)
+        fun stringToList(string: String): List<String>{
+            return string.split(",")
+        }
 
-                // Convert String to List<String>
-                val appeals: List<String> = item.split(",")
-                val children = appeals.map {
-                    val chip = chipGroupInflater.inflate(R.layout.item_chip_appeal, itemGroup, false) as Chip
-                    chip.text = it.trim()
-                    chip
-                }
+        fun highestNumber(numbers: List<RatingModel>?): String {
+            val number = numbers?.maxOf { it.rating!! }
+            return number.toString()
+        }
 
-                itemGroup.removeAllViews()
-
-                for(chip: Chip in children) {
-                    itemGroup.addView(chip)
-                }
-            }
+        fun imageView(fragment: Fragment, url: String?, imageView: ImageView) {
+            Glide
+                .with(fragment)
+                .load(url)
+                .error(R.drawable.placeholder)
+                .centerCrop()
+                .into(imageView)
         }
     }
 }
