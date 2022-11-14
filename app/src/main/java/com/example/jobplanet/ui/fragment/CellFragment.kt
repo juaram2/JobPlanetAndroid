@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobplanet.adapter.CellListAdapter
 import com.example.jobplanet.adapter.CellListAdapterListener
+import com.example.jobplanet.adapter.RecruitListAdapter
+import com.example.jobplanet.adapter.RecruitListAdapterListener
 import com.example.jobplanet.databinding.FragmentCellBinding
-import com.example.jobplanet.viewmodel.JobPlanetVM
+import com.example.jobplanet.viewmodel.CellVM
 
 private const val SEARCH_TERM = "search_term"
 
 class CellFragment : Fragment() {
     private var searchTerm: CharSequence? = null
-    private lateinit var viewModel : JobPlanetVM
+    private lateinit var viewModel : CellVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,9 @@ class CellFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentCellBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[JobPlanetVM::class.java]
+        viewModel = ViewModelProvider(this)[CellVM::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -39,30 +41,30 @@ class CellFragment : Fragment() {
 
         val navController = this.findNavController()
 
-        val adapterListener = CellListAdapterListener(click = {
+        val cellListAdapterListener = CellListAdapterListener(click = {
 //            navController.navigate()
         })
-        val adapter = CellListAdapter(adapterListener)
+        val cellListAdapter = CellListAdapter(cellListAdapterListener)
 
         viewModel.cells.observe(viewLifecycleOwner) { data ->
-            adapter.setData(data)
-            adapter.notifyDataSetChanged()
+            cellListAdapter.setData(data)
+            cellListAdapter.notifyDataSetChanged()
             data?.let {
                 viewModel.noData(data.isEmpty())
             }
         }
 
-        val layoutManager = GridLayoutManager(
-            activity, 2, GridLayoutManager.VERTICAL, false
+        val cellsLayoutManager = LinearLayoutManager(
+            activity, LinearLayoutManager.VERTICAL, false
         )
 
-        binding.recyclerViewRecruit.apply {
+        binding.recyclerViewCell.apply {
             setHasFixedSize(true)
-            setLayoutManager(layoutManager)
-            setAdapter(adapter)
+            layoutManager = cellsLayoutManager
+            adapter = cellListAdapter
         }
 
-        with(binding.recyclerViewRecruit) {
+        with(binding.recyclerViewCell) {
             clipToPadding = false
             clipChildren = false
         }

@@ -1,7 +1,7 @@
 package com.example.jobplanet.adapter
 
-import com.example.jobplanet.model.CellItemModel
+import com.example.jobplanet.model.CellItemsModel
 
-class CellListAdapterListener(val click: (item: CellItemModel) -> Unit) {
-    fun onClick(item: CellItemModel) = click(item)
+class CellListAdapterListener(val click: (item: CellItemsModel) -> Unit) {
+    fun onClick(item: CellItemsModel) = click(item)
 }
