@@ -36,7 +36,11 @@ class CellFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.getCellItems()
+        searchTerm?.let {
+            viewModel.getCellItems(searchTerm.toString())
+        } ?: run {
+            viewModel.getCellItems()
+        }
 
         val navController = this.findNavController()
 

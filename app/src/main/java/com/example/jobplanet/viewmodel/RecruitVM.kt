@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.jobplanet.model.RecruitItemModel
+import com.example.jobplanet.model.RecruitItemsModel
 import com.example.jobplanet.service.ApiClient
 import com.example.jobplanet.service.JobPlanetApi
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +40,8 @@ class RecruitVM(application: Application): BaseVM(application) {
     }
 
     fun getRecruitItems(searchTerm: String? = null) {
+
+        Log.d("searchTerm", searchTerm.toString())
         _loading.value = true
 
         viewModelScope.launch(Dispatchers.Main) {
@@ -46,11 +49,22 @@ class RecruitVM(application: Application): BaseVM(application) {
             try {
                 if (response.isSuccessful) {
                     response.body()?.let { data ->
-                        if (!searchTerm.isNullOrBlank()) {
+                        if (searchTerm?.isNotEmpty() == true && searchTerm != "") {
+                            val oldItems = _recruits.value?.toMutableList()
+
                             val filteredData = data.recruitItems?.filter {
                                 it.title?.contains(searchTerm) == true
                             }
-                            _recruits.postValue(filteredData)
+
+                            if (data.recruitItems != null) {
+                                oldItems?.addAll(filteredData!!)
+                            }
+
+                            val newData = RecruitItemsModel(
+                                recruitItems = oldItems
+                            )
+
+                            _recruits.postValue(newData.recruitItems)
                         } else {
                             _recruits.postValue(data.recruitItems)
                         }
