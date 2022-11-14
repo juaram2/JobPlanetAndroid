@@ -9,15 +9,15 @@ open class BaseActivity() : AppCompatActivity() {
     var loadingProgress: ProgressBar? = null
 
     fun showProgressView() {
-        if(loadingProgress != null) {
+        loadingProgress?.let {
             setUntouchable()
-            loadingProgress!!.visibility = View.VISIBLE
+            it.visibility = View.VISIBLE
         }
     }
 
     fun hideProgressView() {
-        if(loadingProgress != null) {
-            loadingProgress!!.visibility = View.GONE
+        loadingProgress?.let {
+            it.visibility = View.GONE
             setTouchable()
         }
     }

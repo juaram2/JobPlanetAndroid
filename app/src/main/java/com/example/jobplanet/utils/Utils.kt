@@ -1,6 +1,8 @@
 package com.example.jobplanet.utils
 
+import android.os.Build
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.jobplanet.R
@@ -13,12 +15,14 @@ import java.util.*
 class Utils {
     companion object {
         private val decimalFormat = DecimalFormat("#,###,###")
+        @RequiresApi(Build.VERSION_CODES.O)
         private val dateFormat = DateTimeFormatter.ofPattern("yyyy-mm-dd", Locale.ENGLISH)
 
         fun formattingDecimal(number: Int): String {
             return decimalFormat.format(number)
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun formattingDate(date: LocalDateTime): String {
             return dateFormat.format(date)
         }

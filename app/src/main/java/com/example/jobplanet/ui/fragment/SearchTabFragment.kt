@@ -1,56 +1,44 @@
 package com.example.jobplanet.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.jobplanet.R
 import com.example.jobplanet.adapter.SearchTabPagerAdapter
-import com.example.jobplanet.databinding.FragmentSearchTabBinding
+import com.example.jobplanet.databinding.FragmentSearchResultBinding
+import com.example.jobplanet.viewmodel.BaseVM
 import com.example.jobplanet.viewmodel.CellVM
 import com.example.jobplanet.viewmodel.RecruitVM
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class SearchTabFragment : Fragment() {
-    private var searchTerm: String? = ""
+private const val SEARCH_TERM = "search_term"
+
+class SearchResultFragment : Fragment() {
+    private var searchTerm: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            searchTerm = it.getString(SEARCH_TERM)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSearchTabBinding.inflate(inflater, container, false)
+        val binding = FragmentSearchResultBinding.inflate(inflater, container, false)
         val recruitVM = ViewModelProvider(this)[RecruitVM::class.java]
         val cellVM = ViewModelProvider(this)[CellVM::class.java]
 
         binding.recruitVM = recruitVM
         binding.cellVM = cellVM
         binding.lifecycleOwner = this
-
-        // Search View
-        binding.searchView.clearFocus()
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                    searchTerm = it
-                    hideKeyboard()
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                Log.d("searchTerm", newText)
-                searchTerm = newText
-                return false
-            }
-        })
 
         // Tab Layout
         activity?.let { activity ->
@@ -77,14 +65,13 @@ class SearchTabFragment : Fragment() {
         return binding.root
     }
 
-    fun hideKeyboard() {
-        activity?.apply {
-            if (currentFocus != null) {
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view?.windowToken, 0)
-            } else {
-                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    companion object {
+        @JvmStatic
+        fun newInstance(searchTerm: String) =
+            SearchResultFragment().apply {
+                arguments = Bundle().apply {
+                    putString(SEARCH_TERM, searchTerm)
+                }
             }
-        }
     }
 }

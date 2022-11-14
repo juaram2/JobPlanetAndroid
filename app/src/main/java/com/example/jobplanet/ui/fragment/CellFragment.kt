@@ -1,6 +1,7 @@
 package com.example.jobplanet.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jobplanet.MainActivity
 import com.example.jobplanet.adapter.CellListAdapter
-import com.example.jobplanet.adapter.CellListChildAdapter
 import com.example.jobplanet.adapter.CellListChildAdapterListener
 import com.example.jobplanet.databinding.FragmentCellBinding
 import com.example.jobplanet.viewmodel.CellVM
@@ -17,13 +18,13 @@ import com.example.jobplanet.viewmodel.CellVM
 private const val SEARCH_TERM = "search_term"
 
 class CellFragment : Fragment() {
-    private var searchTerm: CharSequence? = null
+    private var searchTerm: String? = null
     private lateinit var viewModel : CellVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            searchTerm = it.getCharSequence(SEARCH_TERM)
+            searchTerm = it.getString(SEARCH_TERM)
         }
     }
 
@@ -36,35 +37,40 @@ class CellFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it == true) {
+                (context as MainActivity).showProgressView()
+            } else {
+                (context as MainActivity).hideProgressView()
+            }
+        }
+
         searchTerm?.let {
-            viewModel.getCellItems(searchTerm.toString())
+            viewModel.getCellItems(it)
         } ?: run {
             viewModel.getCellItems()
         }
 
         val navController = this.findNavController()
 
-        val cellListChildAdapterListener = CellListChildAdapterListener(click = {
-            navController.navigate(SearchTabFragmentDirections.actionToRecruitDetailFragment(it.id))
+        val adapterListener = CellListChildAdapterListener(click = {
+            navController.navigate(SearchFragmentDirections.actionToRecruitDetailFragment(it.id))
         })
-        val cellListAdapter = CellListAdapter(cellListChildAdapterListener)
+        val adapter = CellListAdapter(adapterListener)
 
         viewModel.cells.observe(viewLifecycleOwner) { data ->
-            cellListAdapter.setData(data)
-            cellListAdapter.notifyDataSetChanged()
-            data?.let {
-                viewModel.noData(data.isEmpty())
-            }
+            adapter.setData(data)
+            adapter.notifyDataSetChanged()
         }
 
-        val cellsLayoutManager = LinearLayoutManager(
+        val layoutManager = LinearLayoutManager(
             activity, LinearLayoutManager.VERTICAL, false
         )
 
         binding.recyclerViewCell.apply {
             setHasFixedSize(true)
-            layoutManager = cellsLayoutManager
-            adapter = cellListAdapter
+            setLayoutManager(layoutManager)
+            setAdapter(adapter)
         }
 
         with(binding.recyclerViewCell) {
@@ -76,18 +82,11 @@ class CellFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param searchTerm Parameter 1.
-         * @return A new instance of fragment CellFragment.
-         */
         @JvmStatic
-        fun newInstance(searchTerm: CharSequence?) =
+        fun newInstance(searchTerm: String?) =
             CellFragment().apply {
                 arguments = Bundle().apply {
-                    putCharSequence(SEARCH_TERM, searchTerm)
+                    putString(SEARCH_TERM, searchTerm)
                 }
             }
     }

@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.SearchTabFragment">
+        tools:context=".ui.fragment.SearchFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_layout"
@@ -52,26 +52,14 @@
                 app:layout_constraintLeft_toRightOf="@id/symbol" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            app:tabIndicatorColor="@color/green_500"
-            app:tabSelectedTextColor="@color/green_500"
-            app:tabTextColor="@color/gray_700"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_layout"/>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
+        <FrameLayout
+          android:id="@+id/search_container"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/search_layout"
+          app:layout_constraintBottom_toBottomOf="parent">
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
