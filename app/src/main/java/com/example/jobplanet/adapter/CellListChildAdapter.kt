@@ -16,7 +16,7 @@ import com.google.android.material.chip.ChipGroup
 
 class CellListChildAdapter(
     private val data: List<RecruitItemModel>? = null,
-//    private val listener: CellListChildAdapterListener
+    private val listener: CellListChildAdapterListener
 ) : RecyclerView.Adapter<DefaultViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultViewHolder {
@@ -97,11 +97,11 @@ class CellListChildAdapter(
             /**
              * Navigation
              */
-//            view.setOnClickListener {
-//                item.let {
-//                    listener.onClick(item)
-//                }
-//            }
+            view.setOnClickListener {
+                item.let {
+                    listener.onClick(item)
+                }
+            }
         }
     }
 

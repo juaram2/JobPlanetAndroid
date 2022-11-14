@@ -9,9 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobplanet.adapter.CellListAdapter
-import com.example.jobplanet.adapter.CellListAdapterListener
-import com.example.jobplanet.adapter.RecruitListAdapter
-import com.example.jobplanet.adapter.RecruitListAdapterListener
+import com.example.jobplanet.adapter.CellListChildAdapter
+import com.example.jobplanet.adapter.CellListChildAdapterListener
 import com.example.jobplanet.databinding.FragmentCellBinding
 import com.example.jobplanet.viewmodel.CellVM
 
@@ -41,10 +40,10 @@ class CellFragment : Fragment() {
 
         val navController = this.findNavController()
 
-        val cellListAdapterListener = CellListAdapterListener(click = {
-//            navController.navigate()
+        val cellListChildAdapterListener = CellListChildAdapterListener(click = {
+            navController.navigate(SearchTabFragmentDirections.actionToRecruitDetailFragment(it.id))
         })
-        val cellListAdapter = CellListAdapter(cellListAdapterListener)
+        val cellListAdapter = CellListAdapter(cellListChildAdapterListener)
 
         viewModel.cells.observe(viewLifecycleOwner) { data ->
             cellListAdapter.setData(data)

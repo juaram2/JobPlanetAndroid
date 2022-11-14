@@ -124,7 +124,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/salary_layout"
             tools:text="경력 대비 연봉이 높고 업무환경이 깨끗하게 잘 조성되어 있음. 직원들이 전부 여유로워서 쓸데없는 감정소모와 마찰이 없음"
-            />
+            tools:targetApi="o" />
 
         <LinearLayout
             android:id="@+id/salary_layout"

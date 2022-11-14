@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +14,7 @@ import com.example.jobplanet.model.CellItemModel
 import com.example.jobplanet.utils.DefaultViewHolder
 import com.example.jobplanet.utils.Utils
 
-class CellListAdapter(private val listener: CellListAdapterListener) : RecyclerView.Adapter<DefaultViewHolder>() {
+class CellListAdapter(private val listener: CellListChildAdapterListener) : RecyclerView.Adapter<DefaultViewHolder>() {
     private var data: List<CellItemModel>? = null
 
     fun setData(data: List<CellItemModel>) {
@@ -151,7 +150,7 @@ class CellListAdapter(private val listener: CellListAdapterListener) : RecyclerV
                     item.recommendRecruit?.let {
                         val horizontalDataGroup = horizontalHolder.horizontalList
 
-                        val adapter = CellListChildAdapter(item.recommendRecruit)
+                        val adapter = CellListChildAdapter(item.recommendRecruit, listener)
                         val layoutManager = LinearLayoutManager(horizontalDataGroup.context, LinearLayoutManager.HORIZONTAL, false)
 
                         horizontalDataGroup.adapter = adapter
