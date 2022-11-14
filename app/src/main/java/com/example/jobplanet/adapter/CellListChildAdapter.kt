@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jobplanet.R
@@ -13,12 +14,10 @@ import com.example.jobplanet.utils.Utils
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class RecruitListAdapter(private val listener: RecruitListAdapterListener) : RecyclerView.Adapter<DefaultViewHolder>() {
-    private var data: List<RecruitItemModel>? = null
-
-    fun setData(data: List<RecruitItemModel>) {
-        this.data = data
-    }
+class CellListChildAdapter(
+    private val data: List<RecruitItemModel>? = null,
+//    private val listener: CellListChildAdapterListener
+) : RecyclerView.Adapter<DefaultViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_recruit, parent, false)
@@ -29,6 +28,7 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
         val item = data?.get(position)
         val view = holder.itemView
 
+        val layout = view.findViewById<ConstraintLayout>(R.id.recruit_layout)
         val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
         val title = view.findViewById<TextView>(R.id.title)
         val companyRating = view.findViewById<TextView>(R.id.company_rating)
@@ -37,6 +37,7 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
         val reward = view.findViewById<TextView>(R.id.reward)
 
         item?.let {
+
             /**
              * Thumbnail
              */
@@ -96,11 +97,11 @@ class RecruitListAdapter(private val listener: RecruitListAdapterListener) : Rec
             /**
              * Navigation
              */
-            view.setOnClickListener {
-                item.let {
-                    listener.onClick(item)
-                }
-            }
+//            view.setOnClickListener {
+//                item.let {
+//                    listener.onClick(item)
+//                }
+//            }
         }
     }
 

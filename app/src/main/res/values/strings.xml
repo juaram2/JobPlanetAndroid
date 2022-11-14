@@ -7,13 +7,15 @@
     <string name="no_data">검색 결과 없음</string>
     <string name="reward">축하금</string>
     <string name="won">원</string>
+    <string name="salary_avg">평균 연봉</string>
+    <string name="salary_unit">만원</string>
+    <string name="interview_question">면접 질문</string>
+    <string name="cons">단점</string>
+    <string name="pros">장점</string>
 
     <!-- ImageView : contentDescription -->
     <string name="description_thumbnail">썸네일</string>
     <string name="description_star">별점</string>
     <string name="description_quote">리뷰</string>
     <string name="description_symbol">로고</string>
-    <string name="salary_avg">평균 연봉</string>
-    <string name="salary_unit">만원</string>
-    <string name="interview_question">면접 질문</string>
 </resources>

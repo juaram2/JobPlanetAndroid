@@ -29,7 +29,7 @@ class Utils {
                 // Convert String to List<String>
                 val appeals: List<String> = item.split(",")
                 val children = appeals.map {
-                    val chip = chipGroupInflater.inflate(R.layout.item_appeal, itemGroup, false) as Chip
+                    val chip = chipGroupInflater.inflate(R.layout.item_chip_appeal, itemGroup, false) as Chip
                     chip.text = it.trim()
                     chip
                 }
