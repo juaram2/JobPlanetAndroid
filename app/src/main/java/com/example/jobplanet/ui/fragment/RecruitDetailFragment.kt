@@ -36,25 +36,6 @@ class RecruitDetailFragment : Fragment() {
 
         viewModel.recruit.observe(viewLifecycleOwner) {
             /**
-             * Thumbnail
-             */
-            Utils.imageView(this, it.imageUrl, binding.thumbnail)
-
-            /**
-             * Logo
-             */
-            Utils.imageView(this, it.company?.logoPath, binding.logo)
-
-            /**
-             * Highest Rating
-             */
-            it.company?.ratings?.let { ratings ->
-                binding.rateAvg.text = Utils.highestNumber(ratings)
-            } ?: run {
-                binding.rateAvg.text = "0.0"
-            }
-
-            /**
              * Appeals
              */
             val appealGroup = binding.appealGroup

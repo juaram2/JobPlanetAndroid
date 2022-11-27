@@ -18,6 +18,7 @@
             android:id="@+id/recycler_view_recruit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingVertical="14dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

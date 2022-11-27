@@ -5,7 +5,7 @@
     <string name="search_placeholder">기업, 채용공고 검색</string>
     <string name="popular_recruit">인기 급상승 채용 공고</string>
     <string name="no_data">검색 결과 없음</string>
-    <string name="reward">축하금</string>
+    <string name="reward">보상금 : </string>
     <string name="won">원</string>
     <string name="salary_avg">평균 연봉</string>
     <string name="salary_unit">만원</string>
