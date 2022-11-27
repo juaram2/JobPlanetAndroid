@@ -2,67 +2,35 @@ package com.example.jobplanet.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.jobplanet.R
+import com.example.jobplanet.adapter.holder.RecruitViewHolder
+import com.example.jobplanet.databinding.ItemRecyclerRecruitBinding
 import com.example.jobplanet.model.RecruitItemModel
-import com.example.jobplanet.utils.DefaultViewHolder
-import com.example.jobplanet.utils.Utils
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class CellListChildAdapter(
-    private val data: List<RecruitItemModel>? = null,
-    private val listener: CellListChildAdapterListener
-) : RecyclerView.Adapter<DefaultViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_recruit, parent, false)
-        return DefaultViewHolder(view)
+class CellListChildAdapter(
+    private val data: List<RecruitItemModel>?,
+    private val listener: CellListChildAdapterListener
+) : RecyclerView.Adapter<RecruitViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecruitViewHolder {
+        return RecruitViewHolder(ItemRecyclerRecruitBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: DefaultViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecruitViewHolder, position: Int) {
         val item = data?.get(position)
         val view = holder.itemView
 
-        val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
-        val title = view.findViewById<TextView>(R.id.title)
-        val companyRating = view.findViewById<TextView>(R.id.company_rating)
-        val companyName = view.findViewById<TextView>(R.id.company_name)
-        val appealGroup = view.findViewById<ChipGroup>(R.id.appeal_group)
-        val reward = view.findViewById<TextView>(R.id.reward)
-
         item?.let {
-            /**
-             * Thumbnail
-             */
-            if (!item.imageUrl.isNullOrEmpty()) {
-                Glide.with(view)
-                    .load(item.imageUrl)
-                    .error(R.drawable.placeholder)
-                    .centerCrop()
-                    .into(thumbnail)
-            }
-
-            /**
-             * Title
-             */
-            title.text = item.title ?: ""
-
-            /**
-             * Company
-             */
-            if (item.company != null) {
-                val highestRating = Utils.highestNumber(item.company.ratings)
-                companyRating.text = highestRating
-                companyName.text = item.company.name ?: ""
-            }
+            holder.bind(it)
 
             /**
              * Appeal
              */
+            val appealGroup = view.findViewById<ChipGroup>(R.id.appeal_group)
             if (!item.appeal.isNullOrEmpty()) {
                 val chipGroupInflater = LayoutInflater.from(appealGroup.context)
 
@@ -79,16 +47,6 @@ class CellListChildAdapter(
                 for(chip: Chip in children) {
                     appealGroup.addView(chip)
                 }
-            }
-
-            /**
-             * Reward
-             */
-            if (item.reward != null && item.reward != 0) {
-                val formattedReward = Utils.formattingDecimal(item.reward)
-                reward.text = "보상금: " + formattedReward + "원"
-            } else {
-                reward.text = ""
             }
 
             /**

@@ -5,8 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.example.jobplanet.R
 import com.example.jobplanet.model.RatingModel
 import java.text.DecimalFormat
@@ -16,8 +14,6 @@ import java.util.*
 
 
 object BindingAdapter {
-    private val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
-
     private val decimalFormat = DecimalFormat("#,###,###")
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -54,7 +50,6 @@ object BindingAdapter {
                 .with(imageView)
                 .load(it)
                 .error(R.drawable.placeholder)
-                .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .centerCrop()
                 .into(imageView)
         }
