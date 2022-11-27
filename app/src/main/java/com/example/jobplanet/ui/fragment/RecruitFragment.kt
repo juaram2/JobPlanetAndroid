@@ -1,20 +1,17 @@
 package com.example.jobplanet.ui.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.jobplanet.MainActivity
 import com.example.jobplanet.adapter.RecruitListAdapter
 import com.example.jobplanet.adapter.RecruitListAdapterListener
 import com.example.jobplanet.databinding.FragmentRecruitBinding
+import com.example.jobplanet.ui.activity.RecruitDetailActivity
 import com.example.jobplanet.viewmodel.RecruitVM
 
 private const val SEARCH_TERM = "search_term"
@@ -53,10 +50,8 @@ class RecruitFragment : Fragment() {
             viewModel.getRecruitItems()
         }
 
-        val navController = this.findNavController()
-
         val adapterListener = RecruitListAdapterListener(click = {
-            navController.navigate(SearchFragmentDirections.actionToRecruitDetailFragment(it.id))
+            startActivity(RecruitDetailActivity.recruitDetailIntent(context!!, it.id))
         })
         val adapter = RecruitListAdapter(adapterListener)
 

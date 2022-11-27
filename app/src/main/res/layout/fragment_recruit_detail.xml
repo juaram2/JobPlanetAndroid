@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@color/gray_200"
+                app:image="@{viewModel.recruit.imageUrl}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
@@ -50,6 +51,7 @@
                 android:layout_marginEnd="12dp"
                 android:clipToOutline="true"
                 android:background="@drawable/bg_thumbnail"
+                app:image="@{viewModel.recruit.company.logoPath}"
                 app:layout_constraintTop_toBottomOf="@id/title"
                 app:layout_constraintLeft_toLeftOf="@id/title"
                 app:layout_constraintRight_toLeftOf="@id/name"
@@ -91,6 +93,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/gray_700"
                 android:textStyle="bold"
+                app:rating="@{viewModel.recruit.company.ratings}"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 app:layout_constraintLeft_toRightOf="@id/icon_star"
                 app:layout_constraintRight_toRightOf="parent"
