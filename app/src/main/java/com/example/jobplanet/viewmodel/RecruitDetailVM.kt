@@ -1,7 +1,6 @@
 package com.example.jobplanet.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,7 +16,7 @@ class RecruitDetailVM(application: Application) : BaseVM(application) {
     private val _recruit = MutableLiveData<RecruitItemModel>()
     val recruit: LiveData<RecruitItemModel> = _recruit
 
-    fun getRecruitItems(id: Int) {
+    fun getRecruitItem(id: Int) {
         _loading.value = true
 
         viewModelScope.launch(Dispatchers.Main) {

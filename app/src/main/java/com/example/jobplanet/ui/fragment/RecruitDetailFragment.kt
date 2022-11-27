@@ -7,37 +7,31 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.jobplanet.R
 import com.example.jobplanet.databinding.FragmentRecruitDetailBinding
+import com.example.jobplanet.ui.activity.RecruitDetailActivity
 import com.example.jobplanet.utils.Utils
 import com.example.jobplanet.viewmodel.RecruitDetailVM
 import com.google.android.material.chip.Chip
 
-private const val ID = "id"
-
 class RecruitDetailFragment : Fragment() {
-    private var id: Int? = null
-    private lateinit var viewModel: RecruitDetailVM
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            id = it.getInt(ID)
-        }
-    }
+    private val viewModel by activityViewModels<RecruitDetailVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentRecruitDetailBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[RecruitDetailVM::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        id?.let {
-            viewModel.getRecruitItems(it)
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it == true) {
+                (context as RecruitDetailActivity).showProgressView()
+            } else {
+                (context as RecruitDetailActivity).hideProgressView()
+            }
         }
 
         viewModel.recruit.observe(viewLifecycleOwner) {

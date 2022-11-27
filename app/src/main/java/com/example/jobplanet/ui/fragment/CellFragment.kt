@@ -13,6 +13,7 @@ import com.example.jobplanet.MainActivity
 import com.example.jobplanet.adapter.CellListAdapter
 import com.example.jobplanet.adapter.CellListChildAdapterListener
 import com.example.jobplanet.databinding.FragmentCellBinding
+import com.example.jobplanet.ui.activity.RecruitDetailActivity
 import com.example.jobplanet.viewmodel.CellVM
 
 private const val SEARCH_TERM = "search_term"
@@ -51,10 +52,8 @@ class CellFragment : Fragment() {
             viewModel.getCellItems()
         }
 
-        val navController = this.findNavController()
-
         val adapterListener = CellListChildAdapterListener(click = {
-            navController.navigate(SearchFragmentDirections.actionToRecruitDetailFragment(it.id))
+            startActivity(RecruitDetailActivity.recruitDetailIntent(context!!, it.id))
         })
         val adapter = CellListAdapter(adapterListener)
 

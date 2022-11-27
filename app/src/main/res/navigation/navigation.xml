@@ -16,19 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/recruitFragment"
-        android:name="com.example.jobplanet.ui.fragment.RecruitFragment"
-        android:label="Recruit"
-        tools:layout="@layout/fragment_recruit" />
-
-    <fragment
-        android:id="@+id/cellFragment"
-        android:name="com.example.jobplanet.ui.fragment.CellFragment"
-        android:label="Cell"
-        tools:layout="@layout/fragment_cell">
-    </fragment>
-
-    <fragment
         android:id="@+id/recruitDetailFragment"
         android:name="com.example.jobplanet.ui.fragment.RecruitDetailFragment"
         android:label="RecruitDetail"
@@ -36,5 +23,8 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_recruitDetailFragment_to_searchTabFragment"
+            app:destination="@id/searchTabFragment" />
     </fragment>
 </navigation>

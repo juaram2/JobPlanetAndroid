@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_recruit_detail"
+    app:startDestination="@id/recruitDetailFragment">
+
+    <fragment
+        android:id="@+id/recruitDetailFragment"
+        android:name="com.example.jobplanet.ui.fragment.RecruitDetailFragment"
+        android:label="RecruitDetailFragment"
+        tools:layout="@layout/fragment_recruit_detail"/>
+</navigation>
