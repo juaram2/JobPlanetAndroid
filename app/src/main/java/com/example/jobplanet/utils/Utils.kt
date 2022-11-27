@@ -1,6 +1,7 @@
 package com.example.jobplanet.utils
 
 import android.os.Build
+import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -27,13 +28,16 @@ class Utils {
             return dateFormat.format(date)
         }
 
-        fun stringToList(string: String): List<String>{
+        fun stringToList(string: String): List<String> {
             return string.split(",")
         }
 
-        fun highestNumber(numbers: List<RatingModel>?): String {
-            val number = numbers?.maxOf { it.rating!! }
-            return number.toString()
+        fun highestNumber(numbers: List<RatingModel>): String {
+            val numberMap = numbers.map { number -> number.rating }
+            val sortedNumber = numberMap.sortedByDescending { it }
+            val highestNumber = sortedNumber[0] ?: 0.0
+
+            return highestNumber.toString()
         }
 
         fun imageView(fragment: Fragment, url: String?, imageView: ImageView) {

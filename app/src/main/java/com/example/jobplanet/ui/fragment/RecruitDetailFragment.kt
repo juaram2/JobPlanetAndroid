@@ -48,7 +48,11 @@ class RecruitDetailFragment : Fragment() {
             /**
              * Highest Rating
              */
-            binding.rateAvg.text = Utils.highestNumber(it.company?.ratings)
+            it.company?.ratings?.let { ratings ->
+                binding.rateAvg.text = Utils.highestNumber(ratings)
+            } ?: run {
+                binding.rateAvg.text = "0.0"
+            }
 
             /**
              * Appeals
