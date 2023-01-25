@@ -1,7 +1,14 @@
 # JobPlanetAndroid
  
-## Test base on
-Android 12
+## Tech Stack
 
-## Implemented by
-TabView
+* Kotlin
+* MVVM
+* Coroutine
+* Retrofit
+* DataBinding
+* Lifecycle
+* ViewModel
+* LiveData
+* Navigation Component
+* Glide
