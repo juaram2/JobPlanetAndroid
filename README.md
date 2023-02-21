@@ -1,6 +1,4 @@
-# JobPlanetAndroid
- 
-## Tech Stack
+# SearchTab
 
 * Kotlin
 * MVVM
